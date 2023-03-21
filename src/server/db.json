@@ -6,7 +6,7 @@
       "type": "income",
       "category": "Venda",
       "price": 6000,
-      "date": "2020-04-20T00:00:00.000Z"
+      "createdAt": "2020-04-20T00:00:00.000Z"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "type": "outcome",
       "category": "Alimentação",
       "price": 59,
-      "date": "2020-04-20T00:00:00.000Z"
+      "createdAt": "2020-04-20T00:00:00.000Z"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "type": "outcome",
       "category": "Casa",
       "price": 1200,
-      "date": "2020-04-20T00:00:00.000Z"
+      "createdAt": "2020-04-20T00:00:00.000Z"
     }
   ]
 }
