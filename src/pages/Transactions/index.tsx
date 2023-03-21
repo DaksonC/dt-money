@@ -1,31 +1,16 @@
+import { useContext } from "react";
 import { SearchForm } from "./SearchForm";
-import { instanceTransactions } from "../../api"
 import { Header } from "../../components/Header";
 import { Summery } from "../../components/Summary";
-import { PriceHighlight, TransactionsContainer, TransactionsTable } from "./styles";
-import { useEffect, useState } from "react";
-
-interface ITransactions {
-  id: string;
-  description: string;
-  type: 'income' | 'outcome';
-  category: string;
-  price: number;
-  createdAt: string;
-}
+import { TransactionsContext } from "../../contexts/TransactionsContext";
+import {
+  PriceHighlight,
+  TransactionsContainer,
+  TransactionsTable
+} from "./styles";
 
 export function Transactions() {
-  const [transactions, setTransactions] = useState<ITransactions[]>([])
-
-  async function loadTransactios() {
-    await instanceTransactions.get("/transactions")
-      .then(response => setTransactions(response.data))
-      .catch(error => console.log(error))
-  }
-
-  useEffect(() => {
-    loadTransactios()
-  }, [])
+  const { transactions } = useContext(TransactionsContext)
 
   return (
     <div>
