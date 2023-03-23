@@ -3,6 +3,7 @@ import { SearchForm } from "./SearchForm";
 import { Header } from "../../components/Header";
 import { Summery } from "../../components/Summary";
 import { TransactionsContext } from "../../contexts/TransactionsContext";
+
 import {
   PriceHighlight,
   TransactionsContainer,
@@ -14,7 +15,7 @@ export function Transactions() {
   const { transactions } = useContext(TransactionsContext)
 
   return (
-    <div>
+    <>
       <Header />
       <Summery />
       <TransactionsContainer>
@@ -39,6 +40,6 @@ export function Transactions() {
           })}
         </TransactionsTable>
       </TransactionsContainer>
-    </div>
+    </>
   )
 }

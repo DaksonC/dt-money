@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SearchFromContainer = styled.div`
+export const SearchFromContainer = styled.form`
   display: flex;
   gap: 1rem;
 
@@ -28,8 +28,14 @@ export const SearchFromContainer = styled.div`
     background: transparent;
     color: ${props => props.theme["green-300"]};
     font-weight: bold;
+    cursor: pointer;
 
-    &:hover {
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    &:not(:disabled):hover {
       background: ${props => props.theme["green-500"]};
       color: ${props => props.theme.white};
       border-color: ${props => props.theme["green-500"]};
