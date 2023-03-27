@@ -12,6 +12,7 @@ interface ITransactions {
 
 interface ITransactionsContextType {
   transactions: ITransactions[];
+  fetchTransaction: (query?: string) => Promise<void>;
 }
 
 interface ITransactionsProviderProps {
@@ -23,18 +24,27 @@ export const TransactionsContext = createContext({} as ITransactionsContextType)
 export function TransactionsProvider({ children }: ITransactionsProviderProps) {
   const [transactions, setTransactions] = useState<ITransactions[]>([])
 
-  async function loadTransactios() {
-    await instanceTransactions.get("/transactions")
+  async function fetchTransaction(query?: string) {
+    await instanceTransactions.get(`/transactions`)
       .then(response => setTransactions(response.data))
       .catch(error => console.log(error))
+
+    if (query) {
+      await instanceTransactions.get(`/transactions?q=${query}`)
+        .then(response => setTransactions(response.data))
+        .catch(error => console.log(error))
+    }
   }
 
   useEffect(() => {
-    loadTransactios()
+    fetchTransaction()
   }, [])
 
   return (
-    <TransactionsContext.Provider value={{ transactions }}>
+    <TransactionsContext.Provider value={{
+      transactions,
+      fetchTransaction
+    }}>
       {children}
     </TransactionsContext.Provider>
   )
