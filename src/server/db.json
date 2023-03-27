@@ -23,6 +23,22 @@
       "category": "Casa",
       "price": 1200,
       "createdAt": "2020-04-22T00:00:00.000Z"
+    },
+    {
+      "description": "Pizza",
+      "price": 56,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2023-03-27T22:11:20.677Z",
+      "id": 4
+    },
+    {
+      "description": "Bonus",
+      "price": 1000,
+      "category": "Conquista de meta",
+      "type": "income",
+      "createdAt": "2023-03-27T22:15:55.852Z",
+      "id": 5
     }
   ]
 }
