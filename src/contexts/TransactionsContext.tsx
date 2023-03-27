@@ -1,33 +1,33 @@
-import { createContext, useEffect, useState } from 'react';
-import { api } from '../api';
+import { ReactNode, createContext, useEffect, useState } from 'react'
+import { api } from '../api'
 
 interface ITransactions {
-  id: string;
-  description: string;
-  type: 'income' | 'outcome';
-  category: string;
-  price: number;
-  createdAt: string;
+  id: string
+  description: string
+  type: 'income' | 'outcome'
+  category: string
+  price: number
+  createdAt: string
 }
 
 interface ICreateTransactions {
-  description: string;
-  type: 'income' | 'outcome';
-  category: string;
-  price: number;
+  description: string
+  type: 'income' | 'outcome'
+  category: string
+  price: number
 }
 
 interface ITransactionsContextType {
-  transactions: ITransactions[];
-  fetchTransaction: (query?: string) => Promise<void>;
-  createTransaction: (data: ICreateTransactions) => Promise<void>;
+  transactions: ITransactions[]
+  fetchTransaction: (query?: string) => Promise<void>
+  createTransaction: (data: ICreateTransactions) => Promise<void>
 }
 
 interface ITransactionsProviderProps {
-  children: React.ReactNode;
+  children: ReactNode
 }
 
-export const TransactionsContext = createContext({} as ITransactionsContextType);
+export const TransactionsContext = createContext({} as ITransactionsContextType)
 
 export function TransactionsProvider({ children }: ITransactionsProviderProps) {
   const [transactions, setTransactions] = useState<ITransactions[]>([])
@@ -38,8 +38,8 @@ export function TransactionsProvider({ children }: ITransactionsProviderProps) {
         params: {
           _sort: 'createdAt',
           _order: 'desc',
-          q: query
-        }
+          q: query,
+        },
       })
 
       setTransactions(response.data)
@@ -49,12 +49,7 @@ export function TransactionsProvider({ children }: ITransactionsProviderProps) {
   }
 
   async function createTransaction(data: ICreateTransactions) {
-    const {
-      description,
-      price,
-      category,
-      type,
-    } = data;
+    const { description, price, category, type } = data
 
     try {
       const response = await api.post('/transactions', {
@@ -65,9 +60,9 @@ export function TransactionsProvider({ children }: ITransactionsProviderProps) {
         createdAt: new Date(),
       })
 
-      setTransactions(state => [response.data, ...state])
+      setTransactions((state) => [response.data, ...state])
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
@@ -76,11 +71,13 @@ export function TransactionsProvider({ children }: ITransactionsProviderProps) {
   }, [])
 
   return (
-    <TransactionsContext.Provider value={{
-      transactions,
-      fetchTransaction,
-      createTransaction
-    }}>
+    <TransactionsContext.Provider
+      value={{
+        transactions,
+        fetchTransaction,
+        createTransaction,
+      }}
+    >
       {children}
     </TransactionsContext.Provider>
   )

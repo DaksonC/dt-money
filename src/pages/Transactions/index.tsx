@@ -1,15 +1,15 @@
-import { useContext } from "react";
-import { SearchForm } from "./SearchForm";
-import { Header } from "../../components/Header";
-import { Summery } from "../../components/Summary";
-import { TransactionsContext } from "../../contexts/TransactionsContext";
+import { useContext } from 'react'
+import { SearchForm } from './SearchForm'
+import { Header } from '../../components/Header'
+import { Summery } from '../../components/Summary'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
 
 import {
   PriceHighlight,
   TransactionsContainer,
-  TransactionsTable
-} from "./styles";
-import { dateFormatter, priceFormatter } from "../../utils/formatter";
+  TransactionsTable,
+} from './styles'
+import { dateFormatter, priceFormatter } from '../../utils/formatter'
 
 export function Transactions() {
   const { transactions } = useContext(TransactionsContext)
@@ -21,7 +21,7 @@ export function Transactions() {
       <TransactionsContainer>
         <SearchForm />
         <TransactionsTable>
-          {transactions.map(transaction => {
+          {transactions.map((transaction) => {
             return (
               <tbody key={transaction.id}>
                 <tr>
@@ -33,7 +33,9 @@ export function Transactions() {
                     </PriceHighlight>
                   </td>
                   <td>{transaction.category}</td>
-                  <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
+                  <td>
+                    {dateFormatter.format(new Date(transaction.createdAt))}
+                  </td>
                 </tr>
               </tbody>
             )
